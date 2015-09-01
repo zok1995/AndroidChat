@@ -32,7 +32,7 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
 
         TabHost.TabSpec tabSpec;
         tabSpec = tabHostOnlineOffline.newTabSpec("TAG1");
-        tabSpec.setIndicator("Online");
+        tabSpec.setIndicator("Online", getResources().getDrawable(R.drawable.online));
         tabSpec.setContent(R.id.tabOnline);
         tabHostOnlineOffline.addTab(tabSpec);
 
