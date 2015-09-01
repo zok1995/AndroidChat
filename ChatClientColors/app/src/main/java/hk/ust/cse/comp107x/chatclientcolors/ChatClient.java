@@ -130,4 +130,7 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
             mAdapter.notifyDataSetChanged();
         }
     }
+
+    public void onEmailClick(View view) {
+    }
 }

@@ -7,6 +7,7 @@
     <string name="title_activity_contacts">Contacts</string>
     <string name="friend">Friend Name</string>
     <string name="About">About</string>
+    <string name="Invite"> Invite a friend</string>
 
     <string-array name="friendsOnline">
         <item>John</item>
