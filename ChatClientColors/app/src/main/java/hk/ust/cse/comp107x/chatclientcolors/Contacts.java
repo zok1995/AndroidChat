@@ -88,8 +88,7 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
         switch (id){
             case R.id.action_settings:
                 AlertDialog.Builder builder = new AlertDialog.Builder(Contacts.this);
-                builder.setTitle("About").setMessage("Oleksand_M" +
-                        "                               Ternopil, Ukraine").setNegativeButton("Nice", new DialogInterface.OnClickListener() {
+                builder.setTitle("About").setMessage("Oleksand_M \nTernopil, Ukraine").setNegativeButton("Nice", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
