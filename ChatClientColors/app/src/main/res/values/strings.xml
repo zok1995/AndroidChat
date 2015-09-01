@@ -8,11 +8,17 @@
     <string name="friend">Friend Name</string>
     <string name="About">About</string>
 
-    <string-array name="friends">
+    <string-array name="friendsOnline">
         <item>John</item>
         <item>Paul</item>
-        <item>Stepan</item>
         <item>George</item>
         <item>Ringo</item>
+    </string-array>
+
+    <string-array name="friendsOffline">
+        <item>Bill</item>
+        <item>Edvard</item>
+        <item>Steve</item>
+        <item>Bivsha</item>
     </string-array>
 </resources>

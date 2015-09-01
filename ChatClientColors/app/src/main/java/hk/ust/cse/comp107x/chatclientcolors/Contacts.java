@@ -3,7 +3,6 @@ package hk.ust.cse.comp107x.chatclientcolors;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,9 +18,9 @@ import android.widget.TabHost;
 public class Contacts extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     Toolbar toolbar;
-    String[] names;
+    String[] namesOnline, namesOffline;
 
-    ListView friendView;
+    ListView friendOnlineView, friendOfflineView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +42,21 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
         tabHostOnlineOffline.addTab(tabSpec);
 
 
-        names = getResources().getStringArray(R.array.friends);
+        namesOnline = getResources().getStringArray(R.array.friendsOnline);
+        namesOffline = getResources().getStringArray(R.array.friendsOffline);
 
         // If you are using a ListView widget, then your activity should implement
         // the onItemClickListener. Then you should set the OnItemClickListener for
         // teh ListView.
-        friendView = (ListView) findViewById(R.id.friendListView);
-        friendView.setAdapter(new ArrayAdapter<String>(this, R.layout.friend_item, names));
-        friendView.setOnItemClickListener(this);
+        friendOnlineView = (ListView) findViewById(R.id.friendListView);
+        friendOnlineView.setAdapter(new ArrayAdapter<String>(this, R.layout.friend_item, namesOnline));
+        friendOnlineView.setOnItemClickListener(this);
+
+        friendOfflineView = (ListView) findViewById(R.id.listViewFriendOffline);
+        friendOfflineView.setAdapter(new ArrayAdapter<String>(this, R.layout.friend_item, namesOffline));
+        friendOfflineView.setOnItemClickListener(this);
+
+
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar_contacts); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);                   // Setting toolbar as the ActionBar with setSupportActionBar() call
@@ -60,7 +66,7 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
         Intent mIntent = new Intent(this,ChatClient.class);
-        mIntent.putExtra(getString(R.string.friend), names[position]);
+        mIntent.putExtra(getString(R.string.friend), namesOnline[position]);
         startActivity(mIntent);
 
     }
