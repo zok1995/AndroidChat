@@ -43,6 +43,7 @@
                         android:id="@+id/friendListView"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -55,11 +56,13 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:id="@+id/listViewFriendOffline" />
+
                 </LinearLayout>
 
             </FrameLayout>
 
         </LinearLayout>
     </TabHost>
+
 
 </RelativeLayout>

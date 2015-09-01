@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,6 +35,7 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_client);
+
 
         sendButton = (ImageButton) findViewById(R.id.sendButton);
         sendButton.setOnClickListener(this);
@@ -59,6 +61,8 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         // берем імя друга з інтенту
         Intent in = getIntent();
         String friendName = in.getStringExtra(getString(R.string.friend));
+
+
 
         getSupportActionBar().setTitle(friendName);
     }

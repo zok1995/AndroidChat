@@ -56,8 +56,6 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
         friendOfflineView.setAdapter(new ArrayAdapter<String>(this, R.layout.friend_item, namesOffline));
         friendOfflineView.setOnItemClickListener(this);
 
-
-
         toolbar = (Toolbar) findViewById(R.id.tool_bar_contacts); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);                   // Setting toolbar as the ActionBar with setSupportActionBar() call
     }
