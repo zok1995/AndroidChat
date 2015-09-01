@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TabHost;
 
 
 public class Contacts extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -26,6 +27,15 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+
+        TabHost tabHostOnlineOffline = (TabHost) findViewById(R.id.tabHostOnlineOffline);
+        tabHostOnlineOffline.setup();
+
+        TabHost.TabSpec tabSpec;
+        tabSpec = tabHostOnlineOffline.newTabSpec("TAG1");
+        tabSpec.setIndicator("Online");
+        tabSpec.setContent(R.id.tabOnline);
+        tabHostOnlineOffline.addTab(tabSpec);
 
 
         names = getResources().getStringArray(R.array.friends);
