@@ -26,13 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TabWidget>
 
-            <ListView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/friendListView"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
-
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
@@ -42,7 +35,15 @@
                     android:id="@+id/tabOnline"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/friendListView"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/tabOffline"
