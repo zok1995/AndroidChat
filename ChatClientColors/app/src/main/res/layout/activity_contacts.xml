@@ -37,11 +37,16 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <ListView
+                        android:layout_width="fill_parent"
+                        android:layout_height="414dp"
+                        android:id="@+id/friendListView"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true">
+                        android:layout_height="50dp">
 
                         <ImageButton
                             android:layout_width="50dp"
@@ -66,13 +71,6 @@
                             android:layout_alignBottom="@+id/imageButtonEmail"
                             android:layout_toStartOf="@+id/imageButtonEmail" />
                     </RelativeLayout>
-
-                    <ListView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:id="@+id/friendListView"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true" />
 
                 </LinearLayout>
 

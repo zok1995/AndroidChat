@@ -29,6 +29,7 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
     ArrayList<Message> messages = null;
     int in_index = 0;
 
+
     Toolbar toolbar;
 
     @Override
@@ -131,6 +132,5 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    public void onEmailClick(View view) {
-    }
+
 }

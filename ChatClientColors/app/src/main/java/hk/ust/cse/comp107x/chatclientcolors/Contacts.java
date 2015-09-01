@@ -1,31 +1,40 @@
 package hk.ust.cse.comp107x.chatclientcolors;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TabHost;
 
 
 public class Contacts extends AppCompatActivity implements AdapterView.OnItemClickListener {
-
+    final Context context = this;
     Toolbar toolbar;
     String[] namesOnline, namesOffline;
-
+    ImageButton buttonSendEmail;
     ListView friendOnlineView, friendOfflineView;
+    EditText editTextEmailEnter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+
+        buttonSendEmail = (ImageButton) findViewById(R.id.imageButtonEmail);
 
         TabHost tabHostOnlineOffline = (TabHost) findViewById(R.id.tabHostOnlineOffline);
         tabHostOnlineOffline.setup();
@@ -59,6 +68,22 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
         toolbar = (Toolbar) findViewById(R.id.tool_bar_contacts); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);                   // Setting toolbar as the ActionBar with setSupportActionBar() call
     }
+
+    public void onEmailClick(View view) {
+        LayoutInflater layoutInflaterEmail = LayoutInflater.from(context);
+        View view1InviteEmail = layoutInflaterEmail.inflate(R.layout.invite_email, null);
+
+        AlertDialog.Builder alertDialogSendEmail = new AlertDialog.Builder(Contacts.this);
+        alertDialogSendEmail.setTitle("Invite friend");
+        alertDialogSendEmail.setView(view1InviteEmail);
+
+        editTextEmailEnter = (EditText) findViewById(R.id.editTextEmailFriend);
+
+        //TODO
+
+        alertDialogSendEmail.show();
+    }
+
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
