@@ -24,4 +24,8 @@
     </string-array>
     <string name="title_activity_chat_client_offline">ChatClientOffline</string>
     <string name="me">Oleksandr Malakhovskyi</string>
+    <string name="title_activity_my_profile">MyProfile</string>
+    <string name="skype">Skype:</string>
+    <string name="email">Email</string>
+    <string name="editProfile">Edit profile</string>
 </resources>
