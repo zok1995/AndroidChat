@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class ChatClientOffline extends AppCompatActivity implements View.OnClickListener {
@@ -80,7 +81,21 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
     }
 
     @Override
-    public void onClick(View v) {
-
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.sendButtonOffline:
+                String messString = messageText.getText().toString();
+                if (!messString.equals("")) {
+                    Message message = new Message("", messString, true, new Date());
+                    messages.add(message);
+                    messageList.scrollToPosition(messages.size() - 1);
+                    mAdapter.notifyDataSetChanged();
+                    message = null; //після відсилання очистити поле
+                    messageText.setText("");
+                }
+                break;
+            default:
+                break;
+        }
     }
 }

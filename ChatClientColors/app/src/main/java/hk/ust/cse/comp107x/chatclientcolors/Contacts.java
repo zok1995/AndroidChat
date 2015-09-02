@@ -64,11 +64,21 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
         // teh ListView.
         friendOnlineView = (ListView) findViewById(R.id.friendListView);
         friendOnlineView.setAdapter(new ArrayAdapter<String>(this, R.layout.friend_item, namesOnline));
-        friendOnlineView.setOnItemClickListener(this);
+        friendOnlineView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                onItemClick(parent, view, position, id);
+            }
+        });
 
         friendOfflineView = (ListView) findViewById(R.id.listViewFriendOffline);
         friendOfflineView.setAdapter(new ArrayAdapter<String>(this, R.layout.friend_item, namesOffline));
-        friendOfflineView.setOnItemClickListener(this);
+        friendOfflineView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                onItemClickOffline(parent, view, position, id);
+            }
+        });
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar_contacts); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);                   // Setting toolbar as the ActionBar with setSupportActionBar() call
@@ -94,6 +104,13 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
         Intent mIntent = new Intent(this,ChatClient.class);
+        mIntent.putExtra(getString(R.string.friend), namesOnline[position]);
+        startActivity(mIntent);
+
+    }
+    public void onItemClickOffline(AdapterView<?> adapterView, View view, int position, long id) {
+
+        Intent mIntent = new Intent(this,ChatClientOffline.class);
         mIntent.putExtra(getString(R.string.friend), namesOnline[position]);
         startActivity(mIntent);
 
