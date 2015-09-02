@@ -22,4 +22,5 @@
         <item>Steve</item>
         <item>Bivsha</item>
     </string-array>
+    <string name="title_activity_chat_client_offline">ChatClientOffline</string>
 </resources>

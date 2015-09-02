@@ -20,14 +20,12 @@ import java.util.Date;
 
 public class ChatClient extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton inviteButton;
+    ImageButton sendMessageButton;
     EditText messageText;
     RecyclerView messageList;
     RecyclerView.Adapter mAdapter = null;
     ArrayList<Message> messages = null;
     int in_index = 0;
-
-
     Toolbar toolbar;
 
     @Override
@@ -36,16 +34,13 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_chat_client);
 
 
-        inviteButton = (ImageButton) findViewById(R.id.sendButton);
-        inviteButton.setOnClickListener(this);
+        sendMessageButton = (ImageButton) findViewById(R.id.sendButton);
+        sendMessageButton.setOnClickListener(this);
 
 
         messageText = (EditText) findViewById(R.id.messageText);
 
-        // messages = new ArrayList<String>();
         messages = new ArrayList<Message>();
-
-        // mAdapter = new ArrayAdapter<String>(this, R.layout.mymessage, R.id.mymessageTextView, messages);
         mAdapter = new MyAdapter(this, messages);
 
         messageList = (RecyclerView) findViewById(R.id.messageList);
