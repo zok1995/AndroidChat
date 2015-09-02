@@ -64,12 +64,7 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
         // teh ListView.
         friendOnlineView = (ListView) findViewById(R.id.friendListView);
         friendOnlineView.setAdapter(new ArrayAdapter<String>(this, R.layout.friend_item, namesOnline));
-        friendOnlineView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                onItemClick(parent, view, position, id);
-            }
-        });
+        friendOnlineView.setOnItemClickListener(this);
 
         friendOfflineView = (ListView) findViewById(R.id.listViewFriendOffline);
         friendOfflineView.setAdapter(new ArrayAdapter<String>(this, R.layout.friend_item, namesOffline));
