@@ -51,6 +51,13 @@
         android:padding="5pt"
         android:background="@null">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="This person is offline"
+            android:id="@+id/textView2" />
+
         <android.support.v7.widget.RecyclerView
             android:scrollbars="vertical"
             android:layout_width="match_parent"
