@@ -170,4 +170,9 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
         }
 
     }
+
+    public void onClickEditProfile(View view) {
+        Intent intent = new Intent(this, MyProfile.class);
+        startActivity(intent);
+    }
 }
