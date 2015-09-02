@@ -23,4 +23,5 @@
         <item>Bivsha</item>
     </string-array>
     <string name="title_activity_chat_client_offline">ChatClientOffline</string>
+    <string name="me">Oleksandr Malakhovskyi</string>
 </resources>

@@ -3,11 +3,13 @@ package hk.ust.cse.comp107x.chatclientcolors;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,10 +35,8 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_client);
 
-
         sendMessageButton = (ImageButton) findViewById(R.id.sendButton);
         sendMessageButton.setOnClickListener(this);
-
 
         messageText = (EditText) findViewById(R.id.messageText);
 
@@ -57,8 +57,6 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         Intent in = getIntent();
         String friendName = in.getStringExtra(getString(R.string.friend));
 
-
-
         getSupportActionBar().setTitle(friendName);
     }
 
@@ -78,16 +76,24 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         switch (id){
             case R.id.action_settings:
                 AlertDialog.Builder builder = new AlertDialog.Builder(ChatClient.this);
-                builder.setTitle("About").setMessage("Oleksand_M" +
-                        "                               Ternopil, Ukraine").setNegativeButton("Nice", new DialogInterface.OnClickListener() {
+                builder.setTitle("About").setMessage("Oleksand_M \nTernopil, Ukraine").setNegativeButton("Nice", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
+                builder.setNeutralButton("Author on FB", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Uri uriAddress = Uri.parse("https://www.facebook.com/profile.php?id=100005239003799");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uriAddress);
+                        startActivity(intent);
+                    }
+                });
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
         }
+
         return super.onOptionsItemSelected(item);
     }
     @Override

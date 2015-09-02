@@ -134,6 +134,14 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
                         dialog.cancel();
                     }
                 });
+                builder.setNeutralButton("Author on FB", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Uri uriAddress = Uri.parse("https://www.facebook.com/profile.php?id=100005239003799");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uriAddress);
+                        startActivity(intent);
+                    }
+                });
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
         }

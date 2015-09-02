@@ -1,6 +1,9 @@
 package hk.ust.cse.comp107x.chatclientcolors;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -51,7 +54,7 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        // берем імя друга з інтенту
+        // С–РјСЏ Р»СЋРґРёРЅРё Р· СЏРєРѕСЋ РїРµСЂРµРїРёСЃСѓС”РјРѕСЃСЏ Р· С–РЅС‚РµРЅС‚Сѓ
         Intent in = getIntent();
         String friendName = in.getStringExtra(getString(R.string.friend));
 
@@ -72,9 +75,25 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.action_settings:
+                AlertDialog.Builder builder = new AlertDialog.Builder(ChatClientOffline.this);
+                builder.setTitle("About").setMessage("Oleksand_M \nTernopil, Ukraine").setNegativeButton("Nice", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.setNeutralButton("Author on FB", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Uri uriAddress = Uri.parse("https://www.facebook.com/profile.php?id=100005239003799");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uriAddress);
+                        startActivity(intent);
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -90,7 +109,7 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
                     messages.add(message);
                     messageList.scrollToPosition(messages.size() - 1);
                     mAdapter.notifyDataSetChanged();
-                    message = null; //після відсилання очистити поле
+                    message = null; //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                     messageText.setText("");
                 }
                 break;
