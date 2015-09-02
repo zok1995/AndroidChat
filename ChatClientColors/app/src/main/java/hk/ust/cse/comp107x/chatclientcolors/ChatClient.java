@@ -11,10 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +20,7 @@ import java.util.Date;
 
 public class ChatClient extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton sendButton;
+    ImageButton inviteButton;
     EditText messageText;
     RecyclerView messageList;
     RecyclerView.Adapter mAdapter = null;
@@ -38,8 +36,9 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_chat_client);
 
 
-        sendButton = (ImageButton) findViewById(R.id.sendButton);
-        sendButton.setOnClickListener(this);
+        inviteButton = (ImageButton) findViewById(R.id.sendButton);
+        inviteButton.setOnClickListener(this);
+
 
         messageText = (EditText) findViewById(R.id.messageText);
 
