@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type Friend email : "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/editTextEmailFriend"
+        android:layout_width="221dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="26dp"
+        android:hint="Enter email here"
+        android:layout_toStartOf="@+id/buttonSendEmail">
+
+        <requestFocus />
+
+    </EditText>
+
+    <Button
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:id="@+id/buttonSendEmail"
+        android:layout_gravity="right"
+        android:onClick="onClickSend"
+        android:background="@drawable/ic_send_black_36dp"
+        android:layout_alignBottom="@+id/editTextEmailFriend"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

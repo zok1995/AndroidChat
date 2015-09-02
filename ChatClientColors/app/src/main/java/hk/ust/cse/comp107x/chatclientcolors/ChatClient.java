@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -21,12 +20,13 @@ import java.util.Date;
 
 public class ChatClient extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton sendButton;
+    ImageButton inviteButton;
     EditText messageText;
     RecyclerView messageList;
     RecyclerView.Adapter mAdapter = null;
     ArrayList<Message> messages = null;
     int in_index = 0;
+
 
     Toolbar toolbar;
 
@@ -35,8 +35,10 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_client);
 
-        sendButton = (ImageButton) findViewById(R.id.sendButton);
-        sendButton.setOnClickListener(this);
+
+        inviteButton = (ImageButton) findViewById(R.id.sendButton);
+        inviteButton.setOnClickListener(this);
+
 
         messageText = (EditText) findViewById(R.id.messageText);
 
@@ -59,6 +61,8 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         // берем імя друга з інтенту
         Intent in = getIntent();
         String friendName = in.getStringExtra(getString(R.string.friend));
+
+
 
         getSupportActionBar().setTitle(friendName);
     }
@@ -126,4 +130,6 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
             mAdapter.notifyDataSetChanged();
         }
     }
+
+
 }
