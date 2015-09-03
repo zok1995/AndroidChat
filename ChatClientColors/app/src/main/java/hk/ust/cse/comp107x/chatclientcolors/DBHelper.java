@@ -10,16 +10,16 @@ import android.util.Log;
  * Created by Oleksandr on 03.09.2015.
  */
 public class DBHelper extends SQLiteOpenHelper implements BaseColumns{
-    private static final String DATABASE_NAME = "myProfileDB.db";
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_TABLE = "profile";
+    public static final String DATABASE_NAME = "myProfileDB.db";
+    public static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_TABLE = "profile";
 
-    private static final String NAME = "name";
-    private static final String SURNAME = "surname";
-    private static final String AGE = "age";
-    private static final String SKYPE = "skype";
-    private static final String EMAIL = "email";
-    private static final String PHONE = "phone";
+    public static final String NAME = "name";
+    public static final String SURNAME = "surname";
+    public static final String AGE = "age";
+    public static final String SKYPE = "skype";
+    public static final String EMAIL = "email";
+    public static final String PHONE = "phone";
 
     private static final String DATABASE_TABLE_SCRIPT = "create table " + DATABASE_TABLE +
             " (" + BaseColumns._ID + " integer primary key autoincrement, " +  NAME + " text, " +

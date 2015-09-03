@@ -1,10 +1,13 @@
 package hk.ust.cse.comp107x.chatclientcolors;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,13 +20,26 @@ public class MyProfile extends ActionBarActivity {
     final Context context = this;
     Button buttonEditProfile;
     EditText editTextName, editTextSurname, editTextAge, editTextSkype, editTextEmail, editTextPhone;
+    DBHelper dbHelper;
+    SQLiteDatabase sqLiteDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
 
+        dbHelper = new DBHelper(this, "myProfileDB.db", null, 1);
+
+        sqLiteDatabase = dbHelper.getWritableDatabase();
+
         buttonEditProfile = (Button) findViewById(R.id.buttonEditProfile);
+
+        editTextName = (EditText) findViewById(R.id.editTextEnterName);
+        editTextSurname = (EditText) findViewById(R.id.editTextEnterSurname);
+        editTextAge = (EditText) findViewById(R.id.editTextEnterAge);
+        editTextSkype = (EditText) findViewById(R.id.editTextEnterSkype);
+        editTextEmail = (EditText) findViewById(R.id.editTextEnterEmail);
+        editTextPhone = (EditText) findViewById(R.id.editTextEnterPhone);
     }
 
     @Override
@@ -58,7 +74,12 @@ public class MyProfile extends ActionBarActivity {
         alertDialogEditProfile.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(dbHelper.NAME, "lalalala");
+                sqLiteDatabase.insert(dbHelper.DATABASE_TABLE, dbHelper.NAME, contentValues);
 
+                //editTextName.setText("");
+                Log.i("TAG", "Data inserted");
             }
         });
         alertDialogEditProfile.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -68,12 +89,7 @@ public class MyProfile extends ActionBarActivity {
             }
         });
 
-        editTextName = (EditText) findViewById(R.id.editTextEnterName);
-        editTextSurname = (EditText) findViewById(R.id.editTextEnterSurname);
-        editTextAge = (EditText) findViewById(R.id.editTextEnterAge);
-        editTextSkype = (EditText) findViewById(R.id.editTextEnterSkype);
-        editTextEmail = (EditText) findViewById(R.id.editTextEnterEmail);
-        editTextPhone = (EditText) findViewById(R.id.editTextEnterPhone);
+
 
         alertDialogEditProfile.show();
     }
