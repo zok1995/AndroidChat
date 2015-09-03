@@ -1,17 +1,28 @@
 package hk.ust.cse.comp107x.chatclientcolors;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 public class MyProfile extends ActionBarActivity {
+    final Context context = this;
+    Button buttonEditProfile;
+    EditText editTextName, editTextSurname, editTextAge, editTextSkype, editTextEmail, editTextPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+
+        buttonEditProfile = (Button) findViewById(R.id.buttonEditProfile);
     }
 
     @Override
@@ -34,5 +45,19 @@ public class MyProfile extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClickEditProfile(View view) {
+        LayoutInflater layoutInflaterEditProfile = LayoutInflater.from(context);
+        View view1EditProfile =  layoutInflaterEditProfile.inflate(R.layout.edit_profile, null);
+
+        AlertDialog.Builder alertDialogEditProfile = new AlertDialog.Builder(MyProfile.this);
+        alertDialogEditProfile.setTitle("Invite friend");
+        alertDialogEditProfile.setView(view1EditProfile);
+
+        editTextName = (EditText) findViewById(R.id.editTextEnterName);
+        editTextSurname = (EditText) findViewById(R.id.editTextEnterSurname);
+
+        alertDialogEditProfile.show();
     }
 }
