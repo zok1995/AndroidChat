@@ -15,12 +15,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class MyProfile extends ActionBarActivity {
     final Context context = this;
     Button buttonEditProfile;
     EditText editTextName, editTextSurname, editTextAge, editTextSkype, editTextEmail, editTextPhone;
+    TextView textViewName, textViewSurname, textViewAge, textViewSktpe, textViewEmail, textViewPhone;
     DBHelper dbHelper;
     SQLiteDatabase sqLiteDatabase;
 
@@ -33,13 +35,35 @@ public class MyProfile extends ActionBarActivity {
         dbHelper = new DBHelper(this, "myProfileDB.db", null, 1);
         sqLiteDatabase = dbHelper.getWritableDatabase();
 
+        textViewName = (TextView) findViewById(R.id.textViewName);
+        textViewSurname = (TextView) findViewById(R.id.textViewSurname);
+        textViewAge = (TextView) findViewById(R.id.textViewAge);
+        textViewSktpe = (TextView) findViewById(R.id.textViewSkype);
+        textViewEmail = (TextView) findViewById(R.id.textViewEmail);
+        textViewPhone = (TextView) findViewById(R.id.textViewPhone);
+
         Cursor cursor = sqLiteDatabase.query(dbHelper.DATABASE_TABLE, new String[] {dbHelper.NAME, dbHelper.SURNAME,
                 dbHelper.AGE, dbHelper.SKYPE, dbHelper.EMAIL, dbHelper.PHONE}, null, null, null, null,null);
 
         cursor.moveToFirst();
-        //TODO
+
+        String stringName = cursor.getString(cursor.getColumnIndex(dbHelper.NAME));
+        String stringSurname = cursor.getString(cursor.getColumnIndex(dbHelper.SURNAME));
+        String stringAge = cursor.getString(cursor.getColumnIndex(dbHelper.AGE));
+        String stringSkype = cursor.getString(cursor.getColumnIndex(dbHelper.SKYPE));
+        String stringEmail = cursor.getString(cursor.getColumnIndex(dbHelper.EMAIL));
+        String stringPhone = cursor.getString(cursor.getColumnIndex(dbHelper.PHONE));
+
+        textViewName.setText(stringName);
+        textViewSurname.setText(stringSurname);
+        textViewAge.setText(stringAge);
+        textViewSktpe.setText(stringSkype);
+        textViewEmail.setText(stringEmail);
+        textViewPhone.setText(stringPhone);
+
         buttonEditProfile = (Button) findViewById(R.id.buttonEditProfile);
 
+        cursor.close();
     }
 
     @Override
