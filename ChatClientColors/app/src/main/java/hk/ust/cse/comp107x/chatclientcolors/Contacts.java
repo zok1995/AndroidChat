@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,11 +33,16 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
     Button imageButtonSendEmail;
     ListView friendOnlineView, friendOfflineView;
     EditText editTextEmailEnter;
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+
+        dbHelper = new DBHelper(this, "myProfileDB.db", null, 1);
+        SQLiteDatabase sqLiteDatabase;
+        sqLiteDatabase = dbHelper.getWritableDatabase();
 
         buttonSendEmail = (ImageButton) findViewById(R.id.imageButtonEmail);
         imageButtonSendEmail = (Button) findViewById(R.id.buttonSendEmail);
