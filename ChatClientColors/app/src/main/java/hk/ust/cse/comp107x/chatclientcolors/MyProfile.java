@@ -22,6 +22,7 @@ public class MyProfile extends ActionBarActivity {
     EditText editTextName, editTextSurname, editTextAge, editTextSkype, editTextEmail, editTextPhone;
     DBHelper dbHelper;
     SQLiteDatabase sqLiteDatabase;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,11 @@ public class MyProfile extends ActionBarActivity {
         buttonEditProfile = (Button) findViewById(R.id.buttonEditProfile);
 
         editTextName = (EditText) findViewById(R.id.editTextEnterName);
-        editTextSurname = (EditText) findViewById(R.id.editTextEnterSurname);
+   /*     editTextSurname = (EditText) findViewById(R.id.editTextEnterSurname);
         editTextAge = (EditText) findViewById(R.id.editTextEnterAge);
         editTextSkype = (EditText) findViewById(R.id.editTextEnterSkype);
         editTextEmail = (EditText) findViewById(R.id.editTextEnterEmail);
-        editTextPhone = (EditText) findViewById(R.id.editTextEnterPhone);
+        editTextPhone = (EditText) findViewById(R.id.editTextEnterPhone);*/
     }
 
     @Override
@@ -68,18 +69,17 @@ public class MyProfile extends ActionBarActivity {
         LayoutInflater layoutInflaterEditProfile = LayoutInflater.from(context);
         View view1EditProfile =  layoutInflaterEditProfile.inflate(R.layout.edit_profile, null);
 
+
         final AlertDialog.Builder alertDialogEditProfile = new AlertDialog.Builder(MyProfile.this);
         alertDialogEditProfile.setTitle("Edit profile");
         alertDialogEditProfile.setView(view1EditProfile);
         alertDialogEditProfile.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(dbHelper.NAME, "lalalala");
-                sqLiteDatabase.insert(dbHelper.DATABASE_TABLE, dbHelper.NAME, contentValues);
+                name = editTextName.getText().toString();
+                dbHelper.insertData(name);
+                Log.i("TAG", "DATA added");
 
-                //editTextName.setText("");
-                Log.i("TAG", "Data inserted");
             }
         });
         alertDialogEditProfile.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -89,8 +89,7 @@ public class MyProfile extends ActionBarActivity {
             }
         });
 
-
-
         alertDialogEditProfile.show();
     }
+
 }

@@ -1,5 +1,6 @@
 package hk.ust.cse.comp107x.chatclientcolors;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -33,6 +34,17 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns{
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,
                           int version) {
         super(context, name, factory, version);
+    }
+
+    public  boolean insertData(String name){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(NAME, name);
+        long result = database.insert(DATABASE_TABLE, null,contentValues);
+        if (result == -1)
+            return false;
+        else
+            return true;
     }
 
     @Override
