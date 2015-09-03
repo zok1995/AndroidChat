@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChatClientColors</string>
+    <string name="app_name">ChatClient</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -22,4 +22,20 @@
         <item>Steve</item>
         <item>Bivsha</item>
     </string-array>
+
+    <string name="title_activity_chat_client_offline">ChatClientOffline</string>
+    <string name="me">Oleksandr Malakhovskyi</string>
+    <string name="title_activity_my_profile">MyProfile</string>
+    <string name="skype">Skype:</string>
+    <string name="email">Email</string>
+    <string name="editProfile">Edit profile</string>
+    <string name="profile">Profile</string>
+    <string name="Entername">Enter your name</string>
+    <string name="EnterSurname">Enter your surname</string>
+    <string name="EnterAge">Enter your age</string>
+    <string name="Phone">Phone</string>
+    <string name="EnterSkype">Enter your skype</string>
+    <string name="EnterEmail">Enter your email</string>
+    <string name="EnterPhone">Enter your Phone</string>
+    <string name="Empty">(Empty)</string>
 </resources>

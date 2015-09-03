@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,11 +33,16 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
     Button imageButtonSendEmail;
     ListView friendOnlineView, friendOfflineView;
     EditText editTextEmailEnter;
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+
+        dbHelper = new DBHelper(this, "myProfileDB.db", null, 1);
+        SQLiteDatabase sqLiteDatabase;
+        sqLiteDatabase = dbHelper.getWritableDatabase();
 
         buttonSendEmail = (ImageButton) findViewById(R.id.imageButtonEmail);
         imageButtonSendEmail = (Button) findViewById(R.id.buttonSendEmail);
@@ -68,7 +74,12 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
 
         friendOfflineView = (ListView) findViewById(R.id.listViewFriendOffline);
         friendOfflineView.setAdapter(new ArrayAdapter<String>(this, R.layout.friend_item, namesOffline));
-        friendOfflineView.setOnItemClickListener(this);
+        friendOfflineView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                onItemClickOffline(parent, view, position, id);
+            }
+        });
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar_contacts); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);                   // Setting toolbar as the ActionBar with setSupportActionBar() call
@@ -98,6 +109,13 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
         startActivity(mIntent);
 
     }
+    public void onItemClickOffline(AdapterView<?> adapterView, View view, int position, long id) {
+
+        Intent mIntent = new Intent(this,ChatClientOffline.class);
+        mIntent.putExtra(getString(R.string.friend), namesOnline[position]);
+        startActivity(mIntent);
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -120,6 +138,14 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
+                    }
+                });
+                builder.setNeutralButton("Author on FB", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Uri uriAddress = Uri.parse("https://www.facebook.com/profile.php?id=100005239003799");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uriAddress);
+                        startActivity(intent);
                     }
                 });
                 AlertDialog alertDialog = builder.create();
@@ -149,5 +175,10 @@ public class Contacts extends AppCompatActivity implements AdapterView.OnItemCli
             Toast.makeText(Contacts.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public void onClickEditProfile(View view) {
+        Intent intent = new Intent(this, MyProfile.class);
+        startActivity(intent);
     }
 }
