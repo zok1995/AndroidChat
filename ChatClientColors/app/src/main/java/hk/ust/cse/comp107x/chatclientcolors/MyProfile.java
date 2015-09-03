@@ -2,6 +2,7 @@ package hk.ust.cse.comp107x.chatclientcolors;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -51,12 +52,28 @@ public class MyProfile extends ActionBarActivity {
         LayoutInflater layoutInflaterEditProfile = LayoutInflater.from(context);
         View view1EditProfile =  layoutInflaterEditProfile.inflate(R.layout.edit_profile, null);
 
-        AlertDialog.Builder alertDialogEditProfile = new AlertDialog.Builder(MyProfile.this);
-        alertDialogEditProfile.setTitle("Invite friend");
+        final AlertDialog.Builder alertDialogEditProfile = new AlertDialog.Builder(MyProfile.this);
+        alertDialogEditProfile.setTitle("Edit profile");
         alertDialogEditProfile.setView(view1EditProfile);
+        alertDialogEditProfile.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialogEditProfile.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
 
         editTextName = (EditText) findViewById(R.id.editTextEnterName);
         editTextSurname = (EditText) findViewById(R.id.editTextEnterSurname);
+        editTextAge = (EditText) findViewById(R.id.editTextEnterAge);
+        editTextSkype = (EditText) findViewById(R.id.editTextEnterSkype);
+        editTextEmail = (EditText) findViewById(R.id.editTextEnterEmail);
+        editTextPhone = (EditText) findViewById(R.id.editTextEnterPhone);
 
         alertDialogEditProfile.show();
     }
