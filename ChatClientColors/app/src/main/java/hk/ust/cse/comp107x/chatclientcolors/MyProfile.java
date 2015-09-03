@@ -22,7 +22,6 @@ public class MyProfile extends ActionBarActivity {
     EditText editTextName, editTextSurname, editTextAge, editTextSkype, editTextEmail, editTextPhone;
     DBHelper dbHelper;
     SQLiteDatabase sqLiteDatabase;
-    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +69,11 @@ public class MyProfile extends ActionBarActivity {
         LayoutInflater layoutInflaterEditProfile = LayoutInflater.from(context);
         View view1EditProfile =  layoutInflaterEditProfile.inflate(R.layout.edit_profile, null);
         editTextName = (EditText) view1EditProfile.findViewById(R.id.editTextEnterName);
+        editTextSurname = (EditText) view1EditProfile.findViewById(R.id.editTextEnterSurname);
+        editTextAge = (EditText) view1EditProfile.findViewById(R.id.editTextEnterAge);
+        editTextSkype = (EditText) view1EditProfile.findViewById(R.id.editTextEnterSkype);
+        editTextEmail = (EditText) view1EditProfile.findViewById(R.id.editTextEnterEmail);
+        editTextPhone = (EditText) view1EditProfile.findViewById(R.id.editTextEnterPhone);
 
         final AlertDialog.Builder alertDialogEditProfile = new AlertDialog.Builder(MyProfile.this);
         alertDialogEditProfile.setTitle("Edit profile");
@@ -77,8 +81,12 @@ public class MyProfile extends ActionBarActivity {
         alertDialogEditProfile.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                name = editTextName.getText().toString();
-                dbHelper.insertData(name);
+                dbHelper.insertData(editTextName.getText().toString(),
+                        editTextSurname.getText().toString(),
+                        editTextAge.getText().toString(),
+                        editTextSkype.getText().toString(),
+                        editTextEmail.getText().toString(),
+                        editTextPhone.getText().toString());
                 Log.i("TAG", "DATA added");
 
             }
