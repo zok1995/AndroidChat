@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -30,17 +31,15 @@ public class MyProfile extends ActionBarActivity {
         LayoutInflater layoutInflaterEditProfile = LayoutInflater.from(context);
 
         dbHelper = new DBHelper(this, "myProfileDB.db", null, 1);
-
         sqLiteDatabase = dbHelper.getWritableDatabase();
 
+        Cursor cursor = sqLiteDatabase.query(dbHelper.DATABASE_TABLE, new String[] {dbHelper.NAME, dbHelper.SURNAME,
+                dbHelper.AGE, dbHelper.SKYPE, dbHelper.EMAIL, dbHelper.PHONE}, null, null, null, null,null);
+
+        cursor.moveToFirst();
+        //TODO
         buttonEditProfile = (Button) findViewById(R.id.buttonEditProfile);
 
-        editTextName = (EditText) findViewById(R.id.editTextEnterName);
-   /*     editTextSurname = (EditText) findViewById(R.id.editTextEnterSurname);
-        editTextAge = (EditText) findViewById(R.id.editTextEnterAge);
-        editTextSkype = (EditText) findViewById(R.id.editTextEnterSkype);
-        editTextEmail = (EditText) findViewById(R.id.editTextEnterEmail);
-        editTextPhone = (EditText) findViewById(R.id.editTextEnterPhone);*/
     }
 
     @Override
