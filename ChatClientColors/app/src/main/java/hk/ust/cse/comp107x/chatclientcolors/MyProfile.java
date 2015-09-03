@@ -28,6 +28,7 @@ public class MyProfile extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+        LayoutInflater layoutInflaterEditProfile = LayoutInflater.from(context);
 
         dbHelper = new DBHelper(this, "myProfileDB.db", null, 1);
 
@@ -68,7 +69,7 @@ public class MyProfile extends ActionBarActivity {
     public void onClickEditProfile(View view) {
         LayoutInflater layoutInflaterEditProfile = LayoutInflater.from(context);
         View view1EditProfile =  layoutInflaterEditProfile.inflate(R.layout.edit_profile, null);
-
+        editTextName = (EditText) view1EditProfile.findViewById(R.id.editTextEnterName);
 
         final AlertDialog.Builder alertDialogEditProfile = new AlertDialog.Builder(MyProfile.this);
         alertDialogEditProfile.setTitle("Edit profile");
