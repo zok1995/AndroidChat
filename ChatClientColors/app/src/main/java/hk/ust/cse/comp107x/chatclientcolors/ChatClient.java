@@ -1,6 +1,7 @@
 package hk.ust.cse.comp107x.chatclientcolors;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -22,6 +24,7 @@ import java.util.Date;
 
 public class ChatClient extends AppCompatActivity implements View.OnClickListener {
 
+    final Context context = this;
     ImageButton sendMessageButton;
     EditText messageText;
     RecyclerView messageList;
@@ -29,11 +32,14 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
     ArrayList<Message> messages = null;
     int in_index = 0;
     Toolbar toolbar;
+    Button buttonAddSomething;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_client);
+
+        buttonAddSomething = (Button) findViewById(R.id.buttonAddFotoVideoOnline);
 
         sendMessageButton = (ImageButton) findViewById(R.id.sendButton);
         sendMessageButton.setOnClickListener(this);
@@ -133,4 +139,19 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
     }
 
 
+    public void onClickAddSomething(View view) {
+        final AlertDialog.Builder alertDialogSendSomethting = new AlertDialog.Builder(ChatClient.this);
+        LayoutInflater layoutInflaterAddFile = LayoutInflater.from(context);
+        View viewSendFile =  layoutInflaterAddFile.inflate(R.layout.send_file, null);
+
+        alertDialogSendSomethting.setView(viewSendFile);
+        alertDialogSendSomethting.setTitle("Select File for Sending");
+        alertDialogSendSomethting.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertDialogSendSomethting.show();
+    }
 }

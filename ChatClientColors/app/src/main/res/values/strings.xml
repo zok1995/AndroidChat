@@ -38,4 +38,7 @@
     <string name="EnterEmail">Enter your email</string>
     <string name="EnterPhone">Enter your Phone</string>
     <string name="Empty">(Empty)</string>
+    <string name="ChooseFoto">Choose foto</string>
+    <string name="takeAPicture">Take a picture</string>
+    <string name="chooseFile">Choose file</string>
 </resources>

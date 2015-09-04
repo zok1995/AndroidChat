@@ -30,7 +30,7 @@ public class MyProfile extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
-        LayoutInflater layoutInflaterEditProfile = LayoutInflater.from(context);
+        //LayoutInflater layoutInflaterEditProfile = LayoutInflater.from(context);
 
         dbHelper = new DBHelper(this, "myProfileDB.db", null, 1);
         sqLiteDatabase = dbHelper.getWritableDatabase();
