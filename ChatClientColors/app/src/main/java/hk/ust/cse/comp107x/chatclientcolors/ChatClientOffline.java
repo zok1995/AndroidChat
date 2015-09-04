@@ -1,6 +1,7 @@
 package hk.ust.cse.comp107x.chatclientcolors;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +30,7 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
     ArrayList<Message> messages = null;
     int in_index = 0;
     Toolbar toolbar;
-
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,12 +111,28 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
                     messages.add(message);
                     messageList.scrollToPosition(messages.size() - 1);
                     mAdapter.notifyDataSetChanged();
-                    message = null; //���� ��������� �������� ����
+                    message = null;
                     messageText.setText("");
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    public void onClickAddSomething(View view) {
+        final AlertDialog.Builder alertDialogSendSomethting = new AlertDialog.Builder(ChatClientOffline.this);
+        LayoutInflater layoutInflaterAddFile = LayoutInflater.from(context);
+        View viewSendFile =  layoutInflaterAddFile.inflate(R.layout.send_file, null);
+
+        alertDialogSendSomethting.setView(viewSendFile);
+        alertDialogSendSomethting.setTitle("Select File for Sending");
+        alertDialogSendSomethting.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertDialogSendSomethting.show();
     }
 }
