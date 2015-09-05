@@ -11,10 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -31,6 +33,7 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
     int in_index = 0;
     Toolbar toolbar;
     final Context context = this;
+    Button buttonTakeApicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
 
         sendMessageButton = (ImageButton) findViewById(R.id.sendButtonOffline);
         sendMessageButton.setOnClickListener(this);
+
 
 
         messageText = (EditText) findViewById(R.id.messageTextOffline);
@@ -134,5 +138,18 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
             }
         });
         alertDialogSendSomethting.show();
+    }
+
+    public void onClickTakeApicture(View view) {
+        LayoutInflater layoutInflaterAddFile = LayoutInflater.from(context);
+        View viewSendFile =  layoutInflaterAddFile.inflate(R.layout.send_file, null);
+        buttonTakeApicture = (Button) viewSendFile.findViewById(R.id.buttonAddFotoVideoOffline);
+
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_CAMERA_BUTTON);
+        intent.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN,
+                KeyEvent.KEYCODE_CAMERA));
+        sendOrderedBroadcast(intent, null);
     }
 }

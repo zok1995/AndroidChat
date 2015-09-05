@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,14 +33,27 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
     ArrayList<Message> messages = null;
     int in_index = 0;
     Toolbar toolbar;
-    Button buttonAddSomething;
+    Button buttonAddSomething, buttonTakeApicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_client);
+        LayoutInflater layoutInflaterAddFile = LayoutInflater.from(context);
+        View viewSendFile =  layoutInflaterAddFile.inflate(R.layout.send_file, null);
 
         buttonAddSomething = (Button) findViewById(R.id.buttonAddFotoVideoOnline);
+        buttonTakeApicture = (Button) viewSendFile.findViewById(R.id.buttonTakeAPicture);
+        buttonTakeApicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_CAMERA_BUTTON);
+                intent.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN,
+                        KeyEvent.KEYCODE_CAMERA));
+                sendOrderedBroadcast(intent, null);
+            }
+        });
 
         sendMessageButton = (ImageButton) findViewById(R.id.sendButton);
         sendMessageButton.setOnClickListener(this);
@@ -79,7 +93,7 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.action_settings:
                 AlertDialog.Builder builder = new AlertDialog.Builder(ChatClient.this);
                 builder.setTitle("About").setMessage("Oleksand_M \nTernopil, Ukraine").setNegativeButton("Nice", new DialogInterface.OnClickListener() {
@@ -102,6 +116,7 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -130,10 +145,10 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
                 "Ok, see you at 12 then!"};
 
         if (in_index < incoming.length) {
-            Message message = new Message("John", incoming[in_index], false,  new Date());
+            Message message = new Message("John", incoming[in_index], false, new Date());
             messages.add(message);
             in_index++;
-            messageList.scrollToPosition(messages.size()-1);
+            messageList.scrollToPosition(messages.size() - 1);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -142,7 +157,7 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
     public void onClickAddSomething(View view) {
         final AlertDialog.Builder alertDialogSendSomethting = new AlertDialog.Builder(ChatClient.this);
         LayoutInflater layoutInflaterAddFile = LayoutInflater.from(context);
-        View viewSendFile =  layoutInflaterAddFile.inflate(R.layout.send_file, null);
+        View viewSendFile = layoutInflaterAddFile.inflate(R.layout.send_file, null);
 
         alertDialogSendSomethting.setView(viewSendFile);
         alertDialogSendSomethting.setTitle("Select File for Sending");
@@ -153,5 +168,6 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
             }
         });
         alertDialogSendSomethting.show();
+
     }
 }
