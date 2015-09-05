@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -22,9 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class ChatClient extends AppCompatActivity implements View.OnClickListener {
-
-    final Context context = this;
+public class ChatClientOffline extends AppCompatActivity implements View.OnClickListener {
     ImageButton sendMessageButton;
     EditText messageText;
     RecyclerView messageList;
@@ -32,19 +30,18 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
     ArrayList<Message> messages = null;
     int in_index = 0;
     Toolbar toolbar;
-    Button buttonAddSomething;
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_client);
+        setContentView(R.layout.activity_chat_client_offline);
 
-        buttonAddSomething = (Button) findViewById(R.id.buttonAddFotoVideoOnline);
-
-        sendMessageButton = (ImageButton) findViewById(R.id.sendButton);
+        sendMessageButton = (ImageButton) findViewById(R.id.sendButtonOffline);
         sendMessageButton.setOnClickListener(this);
 
-        messageText = (EditText) findViewById(R.id.messageText);
+
+        messageText = (EditText) findViewById(R.id.messageTextOffline);
 
         messages = new ArrayList<Message>();
         mAdapter = new MyAdapter(this, messages);
@@ -59,17 +56,17 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        // берем імя друга з інтенту
+        // імя людини з якою переписуємося з інтенту
         Intent in = getIntent();
         String friendName = in.getStringExtra(getString(R.string.friend));
 
-        getSupportActionBar().setTitle(friendName);
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_chat_client, menu);
+        getMenuInflater().inflate(R.menu.menu_chat_client_offline, menu);
         return true;
     }
 
@@ -79,9 +76,10 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
         switch (id){
             case R.id.action_settings:
-                AlertDialog.Builder builder = new AlertDialog.Builder(ChatClient.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ChatClientOffline.this);
                 builder.setTitle("About").setMessage("Oleksand_M \nTernopil, Ukraine").setNegativeButton("Nice", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -102,18 +100,18 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.sendButton:
+            case R.id.sendButtonOffline:
                 String messString = messageText.getText().toString();
                 if (!messString.equals("")) {
                     Message message = new Message("", messString, true, new Date());
                     messages.add(message);
                     messageList.scrollToPosition(messages.size() - 1);
                     mAdapter.notifyDataSetChanged();
-                    sendMessage();
-                    message = null; //після відсилання очистити поле
+                    message = null;
                     messageText.setText("");
                 }
                 break;
@@ -122,25 +120,8 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    private void sendMessage() {
-        String[] incoming = {"Hey, How's it going?",
-                "Super! Let's do lunch tomorrow",
-                "How about Mexican?",
-                "Great, I found this new place around the corner",
-                "Ok, see you at 12 then!"};
-
-        if (in_index < incoming.length) {
-            Message message = new Message("John", incoming[in_index], false,  new Date());
-            messages.add(message);
-            in_index++;
-            messageList.scrollToPosition(messages.size()-1);
-            mAdapter.notifyDataSetChanged();
-        }
-    }
-
-
     public void onClickAddSomething(View view) {
-        final AlertDialog.Builder alertDialogSendSomethting = new AlertDialog.Builder(ChatClient.this);
+        final AlertDialog.Builder alertDialogSendSomethting = new AlertDialog.Builder(ChatClientOffline.this);
         LayoutInflater layoutInflaterAddFile = LayoutInflater.from(context);
         View viewSendFile =  layoutInflaterAddFile.inflate(R.layout.send_file, null);
 

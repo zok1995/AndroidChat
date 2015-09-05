@@ -28,13 +28,13 @@
             android:layout_width="46dp"
             android:layout_height="46dp"
             android:background="@drawable/plus"
-            android:id="@+id/buttonAddFotoVideoOnline"
+            android:id="@+id/buttonAddFotoVideoOffline"
             android:onClick="onClickAddSomething"/>
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/messageText"
+            android:id="@+id/messageTextOffline"
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:hint="@string/messagehint" />
@@ -42,7 +42,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/sendButton"
+            android:id="@+id/sendButtonOffline"
             android:src="@drawable/ic_send_black_36dp"
             android:background="@android:drawable/btn_default_small" />
 
@@ -57,6 +57,13 @@
         android:layout_below="@+id/tool_bar"
         android:padding="5pt"
         android:background="@null">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="This person is offline"
+            android:id="@+id/textView2" />
 
         <android.support.v7.widget.RecyclerView
             android:scrollbars="vertical"
