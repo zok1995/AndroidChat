@@ -104,7 +104,8 @@ public class MyProfile extends ActionBarActivity {
         alertDialogEditProfile.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dbHelper.insertData(editTextName.getText().toString(),
+                dbHelper.updateData(1,
+                        editTextName.getText().toString(),
                         editTextSurname.getText().toString(),
                         editTextAge.getText().toString(),
                         editTextSkype.getText().toString(),

@@ -52,6 +52,20 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns{
             return true;
     }
 
+    public boolean updateData(long id,String name, String surname,String age,String skype,String email,String phone){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(_ID, id);
+        contentValues.put(NAME, name);
+        contentValues.put(SURNAME, surname);
+        contentValues.put(AGE,age);
+        contentValues.put(SKYPE, skype);
+        contentValues.put(EMAIL, email);
+        contentValues.put(PHONE, phone);
+        database.update(DATABASE_TABLE, contentValues,_ID + "=" + id ,null);
+        return  true;
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DATABASE_TABLE_SCRIPT);
