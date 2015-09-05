@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -44,16 +45,7 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
 
         buttonAddSomething = (Button) findViewById(R.id.buttonAddFotoVideoOnline);
         buttonTakeApicture = (Button) viewSendFile.findViewById(R.id.buttonTakeAPicture);
-        buttonTakeApicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_CAMERA_BUTTON);
-                intent.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN,
-                        KeyEvent.KEYCODE_CAMERA));
-                sendOrderedBroadcast(intent, null);
-            }
-        });
+        buttonTakeApicture.setOnClickListener(this);
 
         sendMessageButton = (ImageButton) findViewById(R.id.sendButton);
         sendMessageButton.setOnClickListener(this);
@@ -169,5 +161,14 @@ public class ChatClient extends AppCompatActivity implements View.OnClickListene
         });
         alertDialogSendSomethting.show();
 
+    }
+
+    public void onClickSendFile(View view) {
+        Log.i("TAG", "It clicked");
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_CAMERA_BUTTON);
+        intent.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN,
+                KeyEvent.KEYCODE_CAMERA));
+        sendOrderedBroadcast(intent, null);
     }
 }

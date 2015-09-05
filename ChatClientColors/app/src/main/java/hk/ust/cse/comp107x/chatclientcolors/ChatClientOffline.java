@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,7 +31,6 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
     RecyclerView messageList;
     RecyclerView.Adapter mAdapter = null;
     ArrayList<Message> messages = null;
-    int in_index = 0;
     Toolbar toolbar;
     final Context context = this;
     Button buttonTakeApicture;
@@ -39,11 +39,13 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_client_offline);
+        LayoutInflater layoutInflaterAddFile = LayoutInflater.from(context);
+        View viewSendFile =  layoutInflaterAddFile.inflate(R.layout.send_file, null);
+        buttonTakeApicture = (Button) viewSendFile.findViewById(R.id.buttonTakeAPicture);
+        buttonTakeApicture.setOnClickListener(this);
 
         sendMessageButton = (ImageButton) findViewById(R.id.sendButtonOffline);
         sendMessageButton.setOnClickListener(this);
-
-
 
         messageText = (EditText) findViewById(R.id.messageTextOffline);
 
@@ -140,12 +142,8 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
         alertDialogSendSomethting.show();
     }
 
-    public void onClickTakeApicture(View view) {
-        LayoutInflater layoutInflaterAddFile = LayoutInflater.from(context);
-        View viewSendFile =  layoutInflaterAddFile.inflate(R.layout.send_file, null);
-        buttonTakeApicture = (Button) viewSendFile.findViewById(R.id.buttonAddFotoVideoOffline);
-
-
+    public void onClickSendFile(View view) {
+        Log.i("TAG", "It clicked");
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_CAMERA_BUTTON);
         intent.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN,

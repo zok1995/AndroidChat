@@ -17,6 +17,7 @@
         android:layout_height="50dp"
         android:text="@string/takeAPicture"
         android:id="@+id/buttonTakeAPicture"
+        android:onClick="onClickSendFile"
         android:background="@drawable/buttonsendfile"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
