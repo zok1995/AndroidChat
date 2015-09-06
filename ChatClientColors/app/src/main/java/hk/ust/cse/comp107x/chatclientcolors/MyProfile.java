@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
@@ -120,7 +121,10 @@ public class MyProfile extends ActionBarActivity {
                         editTextSkype.getText().toString(),
                         editTextEmail.getText().toString(),
                         editTextPhone.getText().toString());
-                Log.i("TAG", "DATA added");
+                Log.d("TAG", "DATA added");
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
 
             }
         });

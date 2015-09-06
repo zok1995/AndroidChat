@@ -69,7 +69,7 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DATABASE_TABLE_SCRIPT);
-        Log.i("TAG","DB are Created");
+        Log.d("TAG","DB are Created");
     }
 
     @Override
