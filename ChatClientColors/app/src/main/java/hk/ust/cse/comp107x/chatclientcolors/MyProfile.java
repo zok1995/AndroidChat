@@ -45,25 +45,34 @@ public class MyProfile extends ActionBarActivity {
         Cursor cursor = sqLiteDatabase.query(dbHelper.DATABASE_TABLE, new String[] {dbHelper.NAME, dbHelper.SURNAME,
                 dbHelper.AGE, dbHelper.SKYPE, dbHelper.EMAIL, dbHelper.PHONE}, null, null, null, null,null);
 
-        cursor.moveToFirst();
+        if( cursor != null && cursor.moveToFirst() ){
+            String stringName = cursor.getString(cursor.getColumnIndex(dbHelper.NAME));
+            String stringSurname = cursor.getString(cursor.getColumnIndex(dbHelper.SURNAME));
+            String stringAge = cursor.getString(cursor.getColumnIndex(dbHelper.AGE));
+            String stringSkype = cursor.getString(cursor.getColumnIndex(dbHelper.SKYPE));
+            String stringEmail = cursor.getString(cursor.getColumnIndex(dbHelper.EMAIL));
+            String stringPhone = cursor.getString(cursor.getColumnIndex(dbHelper.PHONE));
 
-        String stringName = cursor.getString(cursor.getColumnIndex(dbHelper.NAME));
-        String stringSurname = cursor.getString(cursor.getColumnIndex(dbHelper.SURNAME));
-        String stringAge = cursor.getString(cursor.getColumnIndex(dbHelper.AGE));
-        String stringSkype = cursor.getString(cursor.getColumnIndex(dbHelper.SKYPE));
-        String stringEmail = cursor.getString(cursor.getColumnIndex(dbHelper.EMAIL));
-        String stringPhone = cursor.getString(cursor.getColumnIndex(dbHelper.PHONE));
+            textViewName.setText(stringName);
+            textViewSurname.setText(stringSurname);
+            textViewAge.setText(stringAge);
+            textViewSktpe.setText(stringSkype);
+            textViewEmail.setText(stringEmail);
+            textViewPhone.setText(stringPhone);
+            cursor.close();
+        } else {
+            textViewName.setText("Name Defaut");
+            textViewSurname.setText("Surname Default");
+            textViewAge.setText("Age Default");
+            textViewSktpe.setText("Skype Default");
+            textViewEmail.setText("Email Default");
+            textViewPhone.setText("Phone Default");
+        }
 
-        textViewName.setText(stringName);
-        textViewSurname.setText(stringSurname);
-        textViewAge.setText(stringAge);
-        textViewSktpe.setText(stringSkype);
-        textViewEmail.setText(stringEmail);
-        textViewPhone.setText(stringPhone);
+
 
         buttonEditProfile = (Button) findViewById(R.id.buttonEditProfile);
 
-        cursor.close();
     }
 
     @Override
