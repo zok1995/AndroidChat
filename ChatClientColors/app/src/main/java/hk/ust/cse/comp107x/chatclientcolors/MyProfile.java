@@ -62,12 +62,10 @@ public class MyProfile extends ActionBarActivity {
             textViewPhone.setText(stringPhone);
             cursor.close();
         } else {
-            textViewName.setText("Name Defaut");
-            textViewSurname.setText("Surname Default");
-            textViewAge.setText("Age Default");
-            textViewSktpe.setText("Skype Default");
-            textViewEmail.setText("Email Default");
-            textViewPhone.setText("Phone Default");
+            dbHelper.insertData("Name Defaut","Surname Default", //not working
+                    "Age Default","Skype Default",
+                    "Email Default","Phone Default");
+            cursor.close();
         }
 
 
@@ -108,9 +106,11 @@ public class MyProfile extends ActionBarActivity {
         editTextEmail = (EditText) view1EditProfile.findViewById(R.id.editTextEnterEmail);
         editTextPhone = (EditText) view1EditProfile.findViewById(R.id.editTextEnterPhone);
 
+
         final AlertDialog.Builder alertDialogEditProfile = new AlertDialog.Builder(MyProfile.this);
         alertDialogEditProfile.setTitle("Edit profile");
         alertDialogEditProfile.setView(view1EditProfile);
+
         alertDialogEditProfile.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
