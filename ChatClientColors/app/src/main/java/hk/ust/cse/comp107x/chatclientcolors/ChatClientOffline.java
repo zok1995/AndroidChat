@@ -1,6 +1,7 @@
 package hk.ust.cse.comp107x.chatclientcolors;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,9 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -26,18 +31,21 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
     RecyclerView messageList;
     RecyclerView.Adapter mAdapter = null;
     ArrayList<Message> messages = null;
-    int in_index = 0;
     Toolbar toolbar;
-
+    final Context context = this;
+    Button buttonTakeApicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_client_offline);
+        LayoutInflater layoutInflaterAddFile = LayoutInflater.from(context);
+        View viewSendFile =  layoutInflaterAddFile.inflate(R.layout.send_file, null);
+        buttonTakeApicture = (Button) viewSendFile.findViewById(R.id.buttonTakeAPicture);
+        buttonTakeApicture.setOnClickListener(this);
 
         sendMessageButton = (ImageButton) findViewById(R.id.sendButtonOffline);
         sendMessageButton.setOnClickListener(this);
-
 
         messageText = (EditText) findViewById(R.id.messageTextOffline);
 
@@ -109,12 +117,37 @@ public class ChatClientOffline extends AppCompatActivity implements View.OnClick
                     messages.add(message);
                     messageList.scrollToPosition(messages.size() - 1);
                     mAdapter.notifyDataSetChanged();
-                    message = null; //���� ��������� �������� ����
+                    message = null;
                     messageText.setText("");
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    public void onClickAddSomething(View view) {
+        final AlertDialog.Builder alertDialogSendSomethting = new AlertDialog.Builder(ChatClientOffline.this);
+        LayoutInflater layoutInflaterAddFile = LayoutInflater.from(context);
+        View viewSendFile =  layoutInflaterAddFile.inflate(R.layout.send_file, null);
+
+        alertDialogSendSomethting.setView(viewSendFile);
+        alertDialogSendSomethting.setTitle("Select File for Sending");
+        alertDialogSendSomethting.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertDialogSendSomethting.show();
+    }
+
+    public void onClickSendFile(View view) {
+        Log.i("TAG", "It clicked");
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_CAMERA_BUTTON);
+        intent.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN,
+                KeyEvent.KEYCODE_CAMERA));
+        sendOrderedBroadcast(intent, null);
     }
 }

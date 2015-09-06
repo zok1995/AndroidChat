@@ -64,7 +64,7 @@
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="@string/Invite"
                             android:id="@+id/textView"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:textColor="#1976d2"
                             android:paddingLeft="10dp"
                             android:layout_alignTop="@+id/imageButtonEmail"

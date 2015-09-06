@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:text="@string/ChooseFoto"
+        android:textSize="13sp"
+        android:id="@+id/buttonChooseFromGalery"
+        android:background="@drawable/buttonsendfile"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:text="@string/takeAPicture"
+        android:textSize="13sp"
+        android:id="@+id/buttonTakeAPicture"
+        android:onClick="onClickSendFile"
+        android:background="@drawable/buttonsendfile"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:text="@string/chooseFile"
+        android:textSize="13sp"
+        android:id="@+id/buttonChooseFile"
+        android:background="@drawable/buttonsendfile"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>

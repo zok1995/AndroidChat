@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
@@ -30,7 +31,7 @@ public class MyProfile extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
-        LayoutInflater layoutInflaterEditProfile = LayoutInflater.from(context);
+        //LayoutInflater layoutInflaterEditProfile = LayoutInflater.from(context);
 
         dbHelper = new DBHelper(this, "myProfileDB.db", null, 1);
         sqLiteDatabase = dbHelper.getWritableDatabase();
@@ -45,25 +46,32 @@ public class MyProfile extends ActionBarActivity {
         Cursor cursor = sqLiteDatabase.query(dbHelper.DATABASE_TABLE, new String[] {dbHelper.NAME, dbHelper.SURNAME,
                 dbHelper.AGE, dbHelper.SKYPE, dbHelper.EMAIL, dbHelper.PHONE}, null, null, null, null,null);
 
-        cursor.moveToFirst();
+        if( cursor != null && cursor.moveToFirst() ){
+            String stringName = cursor.getString(cursor.getColumnIndex(dbHelper.NAME));
+            String stringSurname = cursor.getString(cursor.getColumnIndex(dbHelper.SURNAME));
+            String stringAge = cursor.getString(cursor.getColumnIndex(dbHelper.AGE));
+            String stringSkype = cursor.getString(cursor.getColumnIndex(dbHelper.SKYPE));
+            String stringEmail = cursor.getString(cursor.getColumnIndex(dbHelper.EMAIL));
+            String stringPhone = cursor.getString(cursor.getColumnIndex(dbHelper.PHONE));
 
-        String stringName = cursor.getString(cursor.getColumnIndex(dbHelper.NAME));
-        String stringSurname = cursor.getString(cursor.getColumnIndex(dbHelper.SURNAME));
-        String stringAge = cursor.getString(cursor.getColumnIndex(dbHelper.AGE));
-        String stringSkype = cursor.getString(cursor.getColumnIndex(dbHelper.SKYPE));
-        String stringEmail = cursor.getString(cursor.getColumnIndex(dbHelper.EMAIL));
-        String stringPhone = cursor.getString(cursor.getColumnIndex(dbHelper.PHONE));
+            textViewName.setText(stringName);
+            textViewSurname.setText(stringSurname);
+            textViewAge.setText(stringAge);
+            textViewSktpe.setText(stringSkype);
+            textViewEmail.setText(stringEmail);
+            textViewPhone.setText(stringPhone);
+            cursor.close();
+        } else {
+            dbHelper.insertData("Name Defaut","Surname Default", //not working
+                    "Age Default","Skype Default",
+                    "Email Default","Phone Default");
+            cursor.close();
+        }
 
-        textViewName.setText(stringName);
-        textViewSurname.setText(stringSurname);
-        textViewAge.setText(stringAge);
-        textViewSktpe.setText(stringSkype);
-        textViewEmail.setText(stringEmail);
-        textViewPhone.setText(stringPhone);
+
 
         buttonEditProfile = (Button) findViewById(R.id.buttonEditProfile);
 
-        cursor.close();
     }
 
     @Override
@@ -98,19 +106,25 @@ public class MyProfile extends ActionBarActivity {
         editTextEmail = (EditText) view1EditProfile.findViewById(R.id.editTextEnterEmail);
         editTextPhone = (EditText) view1EditProfile.findViewById(R.id.editTextEnterPhone);
 
+
         final AlertDialog.Builder alertDialogEditProfile = new AlertDialog.Builder(MyProfile.this);
         alertDialogEditProfile.setTitle("Edit profile");
         alertDialogEditProfile.setView(view1EditProfile);
+
         alertDialogEditProfile.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dbHelper.insertData(editTextName.getText().toString(),
+                dbHelper.updateData(1,
+                        editTextName.getText().toString(),
                         editTextSurname.getText().toString(),
                         editTextAge.getText().toString(),
                         editTextSkype.getText().toString(),
                         editTextEmail.getText().toString(),
                         editTextPhone.getText().toString());
-                Log.i("TAG", "DATA added");
+                Log.d("TAG", "DATA added");
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
 
             }
         });

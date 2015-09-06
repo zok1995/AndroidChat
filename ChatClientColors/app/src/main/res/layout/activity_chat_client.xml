@@ -24,6 +24,13 @@
         android:elevation="5dp"
         android:layout_margin="0pt">
 
+        <Button
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@drawable/plus"
+            android:id="@+id/buttonAddFotoVideoOnline"
+            android:onClick="onClickAddSomething"/>
+
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
